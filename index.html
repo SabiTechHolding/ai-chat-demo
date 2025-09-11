@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="meta_title">TechNova Solutions | Giải pháp Công nghệ Thông tin</title>
+  <meta name="description" content="TechNova Solutions cung cấp dịch vụ phát triển phần mềm, AI, Cloud, và chuyển đổi số. Tăng tốc đổi mới cho doanh nghiệp với giải pháp toàn diện." />
+  <meta name="keywords" content="công nghệ thông tin, phần mềm, AI, cloud, chuyển đổi số, website, ứng dụng" />
+  <meta name="theme-color" content="#5b7cfa" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="TechNova Solutions | Giải pháp CNTT" />
+  <meta property="og:description" content="Đồng hành chuyển đổi số cùng doanh nghiệp với AI, Cloud và phần mềm chất lượng." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://picsum.photos/1200/630?random=1" />
+  <meta property="og:url" content="https://example.com" />
+
+  <!-- Favicon (tùy chọn) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --bg-soft:#121938;
+      --card:#0f1530;
+      --text:#e9ecff;
+      --muted:#a9b1d6;
+      --brand:#6c8cff;
+      --brand-2:#9a6bff;
+      --accent:#22d3ee;
+      --ok:#22c55e;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --radius:14px;
+      --shadow:0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
+      --glass:rgba(255,255,255,.06);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(156,105,255,.25), transparent 60%),
+        radial-gradient(1000px 600px at -10% 20%, rgba(108,140,255,.25), transparent 60%),
+        var(--bg);
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .container{
+      width:min(1200px, 92%);
+      margin-inline:auto;
+    }
+
+    /* Navbar */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:linear-gradient(180deg, rgba(10,15,32,.9), rgba(10,15,32,.6));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0;}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px;}
+    .logo{
+      width:36px; height:36px; border-radius:10px;
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      display:grid; place-items:center; color:white; font-weight:800;
+      box-shadow:0 10px 20px rgba(108,140,255,.25);
+    }
+    .nav-links{display:flex; gap:22px; align-items:center;}
+    .nav-links a{color:var(--muted); font-weight:600}
+    .nav-links a:hover{color:var(--text)}
+    .cta{
+      padding:10px 16px; border-radius:12px; font-weight:700;
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      color:#fff; box-shadow:0 10px 20px rgba(108,140,255,.3);
+      border:0; cursor:pointer;
+    }
+    .burger{display:none; background:transparent; border:0; color:var(--text); font-size:26px}
+    .lang-select{
+      appearance:none; -webkit-appearance:none; -moz-appearance:none;
+      padding:8px 34px 8px 12px;
+      border-radius:10px;
+      background-color:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+      color:var(--text);
+      font-weight:700;
+      line-height:1;
+      cursor:pointer;
+      transition:border-color .2s, box-shadow .2s, background-color .2s, transform .05s;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23a9b1d6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>');
+      background-repeat:no-repeat;
+      background-position:right 10px center;
+      background-size:14px;
+    }
+    .lang-select:hover{
+      border-color:rgba(255,255,255,.28);
+      background-color:rgba(255,255,255,.08);
+    }
+    .lang-select:focus{outline:none}
+    .lang-select:focus-visible{
+      border-color:rgba(108,140,255,.8);
+      box-shadow:0 0 0 3px rgba(108,140,255,.35), inset 0 1px 0 rgba(255,255,255,.08);
+      background-color:rgba(255,255,255,.09);
+    }
+    .lang-select:active{transform:translateY(1px)}
+    .lang-select:disabled{opacity:.6; cursor:not-allowed}
+    .lang-select option{background:var(--bg); color:var(--text)}
+    /* Hide default arrow in IE */
+    .lang-select::-ms-expand{display:none}
+
+    /* Mobile menu select full width */
+    .mobile-menu .lang-select{width:100%; margin-top:8px}
+
+    @media (max-width:900px){
+      .nav-links{display:none}
+      .burger{display:block}
+      .mobile-menu{
+        position:fixed; inset:64px 0 auto 0; background:rgba(11,16,32,.96);
+        border-top:1px solid rgba(255,255,255,.06);
+        display:none; flex-direction:column; gap:14px; padding:18px; z-index:40;
+      }
+      .mobile-menu a{color:var(--muted); padding:10px 8px; border-radius:10px}
+      .mobile-menu a:hover{background:rgba(255,255,255,.05); color:var(--text)}
+      .mobile-menu.show{display:flex}
+    }
+    @media (min-width:901px){
+      .mobile-menu{display:none}
+    }
+
+    /* Hero */
+    .hero{padding:80px 0 60px; position:relative; overflow:hidden}
+    .hero-grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:36px; align-items:center}
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px; border-radius:999px; font-weight:700; font-size:12px; letter-spacing:.4px;
+      color:#0b1020; background:linear-gradient(135deg, var(--accent), #b8f3ff);
+      margin-bottom:14px;
+    }
+    h1{font-size:clamp(34px, 5vw, 56px); line-height:1.05; margin:6px 0 12px}
+    .subtitle{color:var(--muted); font-size:clamp(16px, 1.6vw, 18px)}
+    .hero-cta{display:flex; gap:14px; margin-top:22px; flex-wrap:wrap}
+    .ghost{
+      padding:10px 16px; border-radius:12px; font-weight:700;
+      background:rgba(255,255,255,.06); color:var(--text); border:1px solid rgba(255,255,255,.12);
+    }
+    .metrics{display:flex; gap:24px; margin-top:26px; color:var(--muted); flex-wrap:wrap}
+    .metric b{color:var(--text); font-size:20px; display:block}
+
+    .hero-card{
+      background:var(--glass); border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius); padding:18px; box-shadow:var(--shadow);
+    }
+    .hero-shot{
+      height:340px; border-radius:12px; overflow:hidden;
+      background:linear-gradient(135deg, rgba(108,140,255,.3), rgba(154,107,255,.25));
+      display:grid; place-items:center; color:#fff; position:relative;
+    }
+    .grid{
+      display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; width:100%; height:100%; padding:10px;
+    }
+    .tile{
+      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12);
+      border-radius:10px; display:grid; place-items:center; color:#eaf2ff; font-weight:700;
+    }
+
+    @media (max-width:900px){
+      .hero{padding:40px 0 30px}
+      .hero-grid{grid-template-columns:1fr}
+    }
+
+    /* Section generic */
+    section{padding:70px 0}
+    .section-title{font-size:28px; margin:0 0 8px}
+    .section-sub{color:var(--muted); margin:0 0 26px}
+
+    /* Features */
+    .features{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px}
+    .card{
+      background:var(--glass); border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius); padding:18px; box-shadow:var(--shadow);
+    }
+    .card h3{margin:0 0 6px}
+    .tag{display:inline-block; font-size:12px; color:#9ddcff; background:rgba(34,211,238,.12); border:1px solid rgba(34,211,238,.4); padding:4px 8px; border-radius:999px; margin-top:8px}
+    @media (max-width:1000px){ .features{grid-template-columns:1fr 1fr} }
+    @media (max-width:640px){ .features{grid-template-columns:1fr} }
+
+    /* Services */
+    .services{display:grid; grid-template-columns:1.2fr .8fr; gap:18px; align-items:start}
+    .steps{display:grid; gap:12px}
+    .step{display:flex; gap:12px; align-items:flex-start}
+    .step-num{
+      width:28px; height:28px; border-radius:8px; flex:0 0 28px; display:grid; place-items:center; font-weight:800;
+      background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#fff; box-shadow:0 6px 14px rgba(108,140,255,.25);
+    }
+    .illus{
+      height:260px; border-radius:12px; background:linear-gradient(135deg, rgba(108,140,255,.18), rgba(154,107,255,.18));
+      border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow);
+    }
+    @media (max-width:900px){ .services{grid-template-columns:1fr} }
+
+    /* Testimonials */
+    .testimonials{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px}
+    .quote{font-style:italic; color:#dbe3ff}
+    .who{color:var(--muted); font-size:14px; margin-top:8px}
+    @media (max-width:900px){ .testimonials{grid-template-columns:1fr} }
+
+    /* Pricing */
+    .pricing{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px}
+    .price{font-size:32px; font-weight:800}
+    .card.highlight{border-color:rgba(108,140,255,.5); background:rgba(108,140,255,.12)}
+    .list{list-style:none; padding:0; margin:12px 0 0}
+    .list li{margin:8px 0; color:var(--muted)}
+    @media (max-width:1000px){ .pricing{grid-template-columns:1fr 1fr} }
+    @media (max-width:640px){ .pricing{grid-template-columns:1fr} }
+
+    /* CTA band */
+    .cta-band{
+      text-align:center; background:linear-gradient(135deg, rgba(108,140,255,.15), rgba(154,107,255,.15));
+      border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); padding:26px; box-shadow:var(--shadow);
+    }
+
+    /* Contact */
+    .contact-grid{display:grid; grid-template-columns: .9fr 1.1fr; gap:18px}
+    form{display:grid; gap:12px}
+    input, textarea{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+      background:rgba(10,15,32,.6); color:var(--text); outline:none;
+    }
+    input:focus, textarea:focus{border-color:rgba(108,140,255,.6)}
+    .notice{color:var(--muted); font-size:14px}
+    @media (max-width:900px){ .contact-grid{grid-template-columns:1fr} }
+
+    /* Footer */
+    footer{padding:30px 0; color:var(--muted); border-top:1px solid rgba(255,255,255,.06); margin-top:40px}
+    .foot{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+    .foot .brand{color:var(--text)}
+    .social{display:flex; gap:14px}
+    .social a{color:var(--muted)}
+    .social a:hover{color:var(--text)}
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo">TN</div>
+        TechNova <span style="color:var(--muted); font-weight:600">Solutions</span>
+      </div>
+      <div class="nav-links">
+        <a href="#features" data-i18n="nav_features">Tính năng</a>
+        <a href="#services" data-i18n="nav_services">Dịch vụ</a>
+        <a href="#pricing" data-i18n="nav_pricing">Bảng giá</a>
+        <a href="#contact" data-i18n="nav_contact">Liên hệ</a>
+        <a class="cta" href="#contact" data-i18n="nav_cta">Nhận tư vấn</a>
+        <select id="langSelect" class="lang-select" aria-label="Language">
+          <option value="vi">VI</option>
+          <option value="en">EN</option>
+          <option value="ja">日本語</option>
+        </select>
+      </div>
+      <button class="burger" id="burger" aria-label="Mở menu" data-i18n-aria="burger_label">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features" data-i18n="nav_features">Tính năng</a>
+      <a href="#services" data-i18n="nav_services">Dịch vụ</a>
+      <a href="#pricing" data-i18n="nav_pricing">Bảng giá</a>
+      <a href="#contact" data-i18n="nav_contact">Liên hệ</a>
+      <a class="cta" href="#contact" data-i18n="nav_cta">Nhận tư vấn</a>
+      <div>
+        <label class="notice" for="langSelectMobile" data-i18n="lang_label">Ngôn ngữ</label>
+        <select id="langSelectMobile" class="lang-select" aria-label="Language">
+          <option value="vi">VI</option>
+          <option value="en">EN</option>
+          <option value="ja">日本語</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge" data-i18n="hero_badge">AI • Cloud • App • Security</div>
+        <h1 data-i18n="hero_title">Đồng hành chuyển đổi số với giải pháp CNTT toàn diện</h1>
+        <p class="subtitle" data-i18n="hero_subtitle">
+          Chúng tôi thiết kế, xây dựng và vận hành hệ thống phần mềm hiện đại giúp doanh nghiệp tăng tốc đổi mới,
+          tối ưu chi phí và mở rộng quy mô bền vững.
+        </p>
+        <div class="hero-cta">
+          <a class="cta" href="#contact" data-i18n="hero_cta_primary">Bắt đầu ngay</a>
+          <a class="ghost" href="#features" data-i18n="hero_cta_secondary">Xem tính năng</a>
+        </div>
+        <div class="metrics">
+          <div class="metric"><b>120+</b> <span data-i18n="metric_projects">Dự án thành công</span></div>
+          <div class="metric"><b>30%</b> <span data-i18n="metric_cost">Tối ưu chi phí Cloud</span></div>
+          <div class="metric"><b>99.9%</b> <span data-i18n="metric_sla">SLA hạ tầng</span></div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-shot">
+          <div class="grid">
+            <div class="tile">AI</div>
+            <div class="tile">Cloud</div>
+            <div class="tile">Web</div>
+            <div class="tile">Mobile</div>
+            <div class="tile">Data</div>
+            <div class="tile">Sec</div>
+            <div class="tile">DevOps</div>
+            <div class="tile">API</div>
+            <div class="tile">UI</div>
+          </div>
+        </div>
+        <div style="margin-top:12px; color:var(--muted); font-size:14px" data-i18n="hero_demo">
+          Demo mô phỏng dashboard giải pháp số với AI, Cloud, bảo mật và phát triển đa nền tảng.
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features -->
+  <section id="features">
+    <div class="container">
+      <h2 class="section-title" data-i18n="features_title">Vì sao chọn TechNova?</h2>
+      <p class="section-sub" data-i18n="features_sub">Nền tảng kỹ thuật vững chắc, quy trình tinh gọn, cam kết kết quả.</p>
+      <div class="features">
+        <div class="card">
+          <h3 data-i18n="feature1_title">Kiến trúc hiện đại</h3>
+          <p data-i18n="feature1_desc">Microservices, sự kiện, CQRS và hạ tầng IaC giúp mở rộng linh hoạt, giảm downtime.</p>
+          <span class="tag" data-i18n="feature1_tag">Scalable</span>
+        </div>
+        <div class="card">
+          <h3 data-i18n="feature2_title">AI tích hợp</h3>
+          <p data-i18n="feature2_desc">Áp dụng NLP, Computer Vision, RAG/LLM cho tác vụ tự động hóa và trải nghiệm cá nhân hóa.</p>
+          <span class="tag" data-i18n="feature2_tag">AI-First</span>
+        </div>
+        <div class="card">
+          <h3 data-i18n="feature3_title">Bảo mật theo chuẩn</h3>
+          <p data-i18n="feature3_desc">Zero Trust, SSO/OAuth2, mã hóa đầu-cuối, tuân thủ ISO 27001 & GDPR.</p>
+          <span class="tag" data-i18n="feature3_tag">Security</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container services">
+      <div>
+        <h2 class="section-title" data-i18n="services_title">Dịch vụ nổi bật</h2>
+        <p class="section-sub" data-i18n="services_sub">Tư vấn, triển khai và vận hành trọn gói.</p>
+        <div class="steps">
+          <div class="step card">
+            <div class="step-num">1</div>
+            <div>
+              <h3 data-i18n="service1_title">Phát triển phần mềm</h3>
+              <p data-i18n="service1_desc">Web, Mobile, API với stack hiện đại (React, .NET, Node, Go). CI/CD và kiểm thử tự động.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="step-num">2</div>
+            <div>
+              <h3 data-i18n="service2_title">Cloud & DevOps</h3>
+              <p data-i18n="service2_desc">Thiết kế kiến trúc AWS/Azure/GCP, Kubernetes, Observability (Prometheus, Grafana).</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="step-num">3</div>
+            <div>
+              <h3 data-i18n="service3_title">AI & Dữ liệu</h3>
+              <p data-i18n="service3_desc">LLM, RAG, pipeline dữ liệu, kho dữ liệu và dashboard BI cho quyết định nhanh.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="step-num">4</div>
+            <div>
+              <h3 data-i18n="service4_title">Security & Compliance</h3>
+              <p data-i18n="service4_desc">Đánh giá bảo mật, pentest, hardening và tư vấn tuân thủ.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="illus card"></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <div class="container">
+      <h2 class="section-title" data-i18n="testimonials_title">Khách hàng nói gì?</h2>
+      <p class="section-sub" data-i18n="testimonials_sub">Tin cậy từ startup đến doanh nghiệp lớn.</p>
+      <div class="testimonials">
+        <div class="card">
+          <div class="quote" data-i18n="quote1">“Triển khai nhanh, chất lượng tốt, hỗ trợ tận tâm – hệ thống của chúng tôi chạy ổn định ngay từ ngày đầu.”</div>
+          <div class="who" data-i18n="who1">— Trần Minh, CTO, FintechX</div>
+        </div>
+        <div class="card">
+          <div class="quote" data-i18n="quote2">“Giải pháp AI giúp giảm 40% thời gian xử lý nghiệp vụ và nâng trải nghiệm khách hàng.”</div>
+          <div class="who" data-i18n="who2">— Nguyễn An, COO, RetailPro</div>
+        </div>
+        <div class="card">
+          <div class="quote" data-i18n="quote3">“Đội ngũ am hiểu bảo mật và cloud, tư vấn rõ ràng, tiết kiệm đáng kể chi phí vận hành.”</div>
+          <div class="who" data-i18n="who3">— Lê Hoàng, CIO, HealthOne</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing">
+    <div class="container">
+      <h2 class="section-title" data-i18n="pricing_title">Bảng giá linh hoạt</h2>
+      <p class="section-sub" data-i18n="pricing_sub">Chọn gói phù hợp mục tiêu hiện tại của bạn.</p>
+      <div class="pricing">
+        <div class="card">
+          <h3 data-i18n="pricing_starter">Starter</h3>
+          <div class="price" data-i18n="pricing_starter_price">15 triệu/tháng</div>
+          <ul class="list">
+            <li data-i18n="pricing_starter_f1">Hỗ trợ 5 tính năng</li>
+            <li data-i18n="pricing_starter_f2">Triển khai cloud cơ bản</li>
+            <li data-i18n="pricing_starter_f3">Giờ hỗ trợ: 8x5</li>
+          </ul>
+          <div style="margin-top:14px"><a class="ghost" href="#contact" data-i18n="pricing_select">Chọn gói</a></div>
+        </div>
+        <div class="card highlight">
+          <h3 data-i18n="pricing_growth">Growth</h3>
+          <div class="price" data-i18n="pricing_growth_price">35 triệu/tháng</div>
+          <ul class="list">
+            <li data-i18n="pricing_growth_f1">Module AI/RAG cơ bản</li>
+            <li data-i18n="pricing_growth_f2">Kubernetes + Observability</li>
+            <li data-i18n="pricing_growth_f3">Giờ hỗ trợ: 12x5</li>
+          </ul>
+          <div style="margin-top:14px"><a class="cta" href="#contact" data-i18n="pricing_select">Chọn gói</a></div>
+        </div>
+        <div class="card">
+          <h3 data-i18n="pricing_enterprise">Enterprise</h3>
+          <div class="price" data-i18n="pricing_enterprise_price">Liên hệ</div>
+          <ul class="list">
+            <li data-i18n="pricing_enterprise_f1">Thiết kế kiến trúc chuyên sâu</li>
+            <li data-i18n="pricing_enterprise_f2">LLM tùy biến & bảo mật nâng cao</li>
+            <li data-i18n="pricing_enterprise_f3">Hỗ trợ 24x7</li>
+          </ul>
+          <div style="margin-top:14px"><a class="ghost" href="#contact" data-i18n="contact_us">Liên hệ</a></div>
+        </div>
+      </div>
+      <div class="cta-band" style="margin-top:18px">
+        <span data-i18n="pricing_band">Sẵn sàng bắt đầu? Nhận tư vấn miễn phí trong 30 phút từ chuyên gia của chúng tôi.</span>
+        <div style="margin-top:12px"><a class="cta" href="#contact" data-i18n="book_now">Đặt lịch ngay</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title" data-i18n="contact_title">Liên hệ</h2>
+      <p class="section-sub" data-i18n="contact_sub">Cho chúng tôi biết nhu cầu của bạn. Chúng tôi sẽ phản hồi trong 24 giờ.</p>
+      <div class="contact-grid">
+        <div class="card">
+          <h3 data-i18n="contact_info_title">Thông tin</h3>
+          <p class="notice">
+            <span>Email:</span> hello@technova.example<br />
+            <span data-i18n="contact_hotline_label">Hotline:</span> 0900 000 000<br />
+            <span data-i18n="contact_address_label">Địa chỉ:</span> <span data-i18n="contact_address">Quận 1, TP. Hồ Chí Minh</span>
+          </p>
+          <p class="notice" data-i18n="contact_hours">Giờ làm việc: 09:00–18:00 (Thứ 2–Thứ 6)</p>
+        </div>
+        <form class="card" id="contactForm">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+            <input required name="name" placeholder="Họ và tên" data-i18n-placeholder="form_name" />
+            <input required type="email" name="email" placeholder="Email" data-i18n-placeholder="form_email" />
+          </div>
+          <input name="company" placeholder="Công ty (tuỳ chọn)" data-i18n-placeholder="form_company" />
+          <textarea required name="message" rows="5" placeholder="Mô tả ngắn về dự án hoặc nhu cầu..." data-i18n-placeholder="form_message"></textarea>
+          <label style="display:flex; gap:10px; align-items:center; color:var(--muted); font-size:14px">
+            <input type="checkbox" required /> <span data-i18n="form_policy">Tôi đồng ý với chính sách bảo mật.</span>
+          </label>
+          <button class="cta" type="submit" data-i18n="form_submit">Gửi yêu cầu</button>
+          <div id="formStatus" class="notice"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div data-helpbot-widget></div>
+
+  <footer>
+    <div class="container foot">
+      <div class="brand">
+        <div class="logo">TN</div>
+        TechNova <span style="color:var(--muted); font-weight:600">Solutions</span>
+      </div>
+      <div class="social">
+        <a href="#" aria-label="Twitter">Twitter</a>
+        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        <a href="#" aria-label="GitHub">GitHub</a>
+      </div>
+      <div>© <span id="year"></span> TechNova Solutions. <span data-i18n="footer_rights">All rights reserved.</span></div>
+    </div>
+  </footer>
+
+  <script>
+    // i18n dictionary
+    const i18n = {
+      vi: {
+        meta_title: 'TechNova Solutions | Giải pháp Công nghệ Thông tin',
+        meta_desc: 'TechNova Solutions cung cấp dịch vụ phát triển phần mềm, AI, Cloud, và chuyển đổi số. Tăng tốc đổi mới cho doanh nghiệp với giải pháp toàn diện.',
+        nav_features: 'Tính năng',
+        nav_services: 'Dịch vụ',
+        nav_pricing: 'Bảng giá',
+        nav_contact: 'Liên hệ',
+        nav_cta: 'Nhận tư vấn',
+        burger_label: 'Mở menu',
+        lang_label: 'Ngôn ngữ',
+        hero_badge: 'AI • Cloud • App • Security',
+        hero_title: 'Đồng hành chuyển đổi số với giải pháp CNTT toàn diện',
+        hero_subtitle: 'Chúng tôi thiết kế, xây dựng và vận hành hệ thống phần mềm hiện đại giúp doanh nghiệp tăng tốc đổi mới, tối ưu chi phí và mở rộng quy mô bền vững.',
+        hero_cta_primary: 'Bắt đầu ngay',
+        hero_cta_secondary: 'Xem tính năng',
+        metric_projects: 'Dự án thành công',
+        metric_cost: 'Tối ưu chi phí Cloud',
+        metric_sla: 'SLA hạ tầng',
+        hero_demo: 'Demo mô phỏng dashboard giải pháp số với AI, Cloud, bảo mật và phát triển đa nền tảng.',
+        features_title: 'Vì sao chọn TechNova?',
+        features_sub: 'Nền tảng kỹ thuật vững chắc, quy trình tinh gọn, cam kết kết quả.',
+        feature1_title: 'Kiến trúc hiện đại',
+        feature1_desc: 'Microservices, sự kiện, CQRS và hạ tầng IaC giúp mở rộng linh hoạt, giảm downtime.',
+        feature1_tag: 'Scalable',
+        feature2_title: 'AI tích hợp',
+        feature2_desc: 'Áp dụng NLP, Computer Vision, RAG/LLM cho tác vụ tự động hóa và trải nghiệm cá nhân hóa.',
+        feature2_tag: 'AI-First',
+        feature3_title: 'Bảo mật theo chuẩn',
+        feature3_desc: 'Zero Trust, SSO/OAuth2, mã hóa đầu-cuối, tuân thủ ISO 27001 & GDPR.',
+        feature3_tag: 'Security',
+        services_title: 'Dịch vụ nổi bật',
+        services_sub: 'Tư vấn, triển khai và vận hành trọn gói.',
+        service1_title: 'Phát triển phần mềm',
+        service1_desc: 'Web, Mobile, API với stack hiện đại (React, .NET, Node, Go). CI/CD và kiểm thử tự động.',
+        service2_title: 'Cloud & DevOps',
+        service2_desc: 'Thiết kế kiến trúc AWS/Azure/GCP, Kubernetes, Observability (Prometheus, Grafana).',
+        service3_title: 'AI & Dữ liệu',
+        service3_desc: 'LLM, RAG, pipeline dữ liệu, kho dữ liệu và dashboard BI cho quyết định nhanh.',
+        service4_title: 'Security & Compliance',
+        service4_desc: 'Đánh giá bảo mật, pentest, hardening và tư vấn tuân thủ.',
+        testimonials_title: 'Khách hàng nói gì?',
+        testimonials_sub: 'Tin cậy từ startup đến doanh nghiệp lớn.',
+        quote1: '“Triển khai nhanh, chất lượng tốt, hỗ trợ tận tâm – hệ thống của chúng tôi chạy ổn định ngay từ ngày đầu.”',
+        who1: '— Trần Minh, CTO, FintechX',
+        quote2: '“Giải pháp AI giúp giảm 40% thời gian xử lý nghiệp vụ và nâng trải nghiệm khách hàng.”',
+        who2: '— Nguyễn An, COO, RetailPro',
+        quote3: '“Đội ngũ am hiểu bảo mật và cloud, tư vấn rõ ràng, tiết kiệm đáng kể chi phí vận hành.”',
+        who3: '— Lê Hoàng, CIO, HealthOne',
+        pricing_title: 'Bảng giá linh hoạt',
+        pricing_sub: 'Chọn gói phù hợp mục tiêu hiện tại của bạn.',
+        pricing_starter: 'Starter',
+        pricing_starter_price: '15 triệu/tháng',
+        pricing_starter_f1: 'Hỗ trợ 5 tính năng',
+        pricing_starter_f2: 'Triển khai cloud cơ bản',
+        pricing_starter_f3: 'Giờ hỗ trợ: 8x5',
+        pricing_growth: 'Growth',
+        pricing_growth_price: '35 triệu/tháng',
+        pricing_growth_f1: 'Module AI/RAG cơ bản',
+        pricing_growth_f2: 'Kubernetes + Observability',
+        pricing_growth_f3: 'Giờ hỗ trợ: 12x5',
+        pricing_enterprise: 'Enterprise',
+        pricing_enterprise_price: 'Liên hệ',
+        pricing_enterprise_f1: 'Thiết kế kiến trúc chuyên sâu',
+        pricing_enterprise_f2: 'LLM tùy biến & bảo mật nâng cao',
+        pricing_enterprise_f3: 'Hỗ trợ 24x7',
+        pricing_select: 'Chọn gói',
+        contact_us: 'Liên hệ',
+        pricing_band: 'Sẵn sàng bắt đầu? Nhận tư vấn miễn phí trong 30 phút từ chuyên gia của chúng tôi.',
+        book_now: 'Đặt lịch ngay',
+        contact_title: 'Liên hệ',
+        contact_sub: 'Cho chúng tôi biết nhu cầu của bạn. Chúng tôi sẽ phản hồi trong 24 giờ.',
+        contact_info_title: 'Thông tin',
+        contact_hotline_label: 'Hotline:',
+        contact_address_label: 'Địa chỉ:',
+        contact_address: 'Quận 1, TP. Hồ Chí Minh',
+        contact_hours: 'Giờ làm việc: 09:00–18:00 (Thứ 2–Thứ 6)',
+        form_name: 'Họ và tên',
+        form_email: 'Email',
+        form_company: 'Công ty (tuỳ chọn)',
+        form_message: 'Mô tả ngắn về dự án hoặc nhu cầu...',
+        form_policy: 'Tôi đồng ý với chính sách bảo mật.',
+        form_submit: 'Gửi yêu cầu',
+        form_sending: 'Đang gửi...',
+        form_thanks: 'Cảm ơn bạn! Yêu cầu đã được ghi nhận. (Demo – chưa gửi thực tế)',
+        footer_rights: 'All rights reserved.'
+      },
+      en: {
+        meta_title: 'TechNova Solutions | IT Solutions',
+        meta_desc: 'TechNova Solutions provides software development, AI, Cloud, and digital transformation services. Accelerate innovation with end-to-end solutions.',
+        nav_features: 'Features',
+        nav_services: 'Services',
+        nav_pricing: 'Pricing',
+        nav_contact: 'Contact',
+        nav_cta: 'Get a consult',
+        burger_label: 'Open menu',
+        lang_label: 'Language',
+        hero_badge: 'AI • Cloud • App • Security',
+        hero_title: 'Accelerate digital transformation with end-to-end IT solutions',
+        hero_subtitle: 'We design, build, and run modern software systems to help businesses innovate faster, optimize costs, and scale sustainably.',
+        hero_cta_primary: 'Get started',
+        hero_cta_secondary: 'See features',
+        metric_projects: 'Successful projects',
+        metric_cost: 'Cloud cost optimized',
+        metric_sla: 'Infrastructure SLA',
+        hero_demo: 'Demo of a digital solutions dashboard with AI, Cloud, security, and cross-platform development.',
+        features_title: 'Why choose TechNova?',
+        features_sub: 'Strong engineering foundation, lean process, results commitment.',
+        feature1_title: 'Modern architecture',
+        feature1_desc: 'Microservices, events, CQRS and IaC for flexible scaling and reduced downtime.',
+        feature1_tag: 'Scalable',
+        feature2_title: 'AI integrated',
+        feature2_desc: 'NLP, Computer Vision, RAG/LLM for automation and personalized experiences.',
+        feature2_tag: 'AI-First',
+        feature3_title: 'Standards-based security',
+        feature3_desc: 'Zero Trust, SSO/OAuth2, end-to-end encryption, ISO 27001 & GDPR compliant.',
+        feature3_tag: 'Security',
+        services_title: 'Featured services',
+        services_sub: 'Consulting, implementation, and operations.',
+        service1_title: 'Software development',
+        service1_desc: 'Web, Mobile, APIs with modern stacks (React, .NET, Node, Go). CI/CD and automated testing.',
+        service2_title: 'Cloud & DevOps',
+        service2_desc: 'Architecture on AWS/Azure/GCP, Kubernetes, Observability (Prometheus, Grafana).',
+        service3_title: 'AI & Data',
+        service3_desc: 'LLMs, RAG, data pipelines, data warehouses and BI dashboards for faster decisions.',
+        service4_title: 'Security & Compliance',
+        service4_desc: 'Security assessments, pentest, hardening and compliance advisory.',
+        testimonials_title: 'What clients say',
+        testimonials_sub: 'Trusted from startups to enterprises.',
+        quote1: '“Fast delivery, great quality, dedicated support — our system was stable from day one.”',
+        who1: '— Tran Minh, CTO, FintechX',
+        quote2: '“AI solutions cut process time by 40% and improved customer experience.”',
+        who2: '— Nguyen An, COO, RetailPro',
+        quote3: '“Strong in security and cloud, clear consulting, significantly reduced operating costs.”',
+        who3: '— Le Hoang, CIO, HealthOne',
+        pricing_title: 'Flexible pricing',
+        pricing_sub: 'Pick a plan that fits your goals.',
+        pricing_starter: 'Starter',
+        pricing_starter_price: 'VND 15M / month',
+        pricing_starter_f1: 'Up to 5 features',
+        pricing_starter_f2: 'Basic cloud setup',
+        pricing_starter_f3: 'Support hours: 8x5',
+        pricing_growth: 'Growth',
+        pricing_growth_price: 'VND 35M / month',
+        pricing_growth_f1: 'Basic AI/RAG module',
+        pricing_growth_f2: 'Kubernetes + Observability',
+        pricing_growth_f3: 'Support hours: 12x5',
+        pricing_enterprise: 'Enterprise',
+        pricing_enterprise_price: 'Contact us',
+        pricing_enterprise_f1: 'Deep architecture design',
+        pricing_enterprise_f2: 'Custom LLM & advanced security',
+        pricing_enterprise_f3: '24x7 support',
+        pricing_select: 'Choose plan',
+        contact_us: 'Contact',
+        pricing_band: 'Ready to start? Get a free 30-minute consultation with our experts.',
+        book_now: 'Book now',
+        contact_title: 'Contact',
+        contact_sub: 'Tell us your needs. We will respond within 24 hours.',
+        contact_info_title: 'Information',
+        contact_hotline_label: 'Hotline:',
+        contact_address_label: 'Address:',
+        contact_address: 'District 1, Ho Chi Minh City',
+        contact_hours: 'Working hours: 09:00–18:00 (Mon–Fri)',
+        form_name: 'Full name',
+        form_email: 'Email',
+        form_company: 'Company (optional)',
+        form_message: 'Short description of your project or needs...',
+        form_policy: 'I agree to the privacy policy.',
+        form_submit: 'Send request',
+        form_sending: 'Sending...',
+        form_thanks: 'Thank you! Your request has been received. (Demo — not actually sent)',
+        footer_rights: 'All rights reserved.'
+      },
+      ja: {
+        meta_title: 'TechNova Solutions | ITソリューション',
+        meta_desc: 'TechNova Solutionsは、ソフトウェア開発、AI、クラウド、およびデジタル変革サービスを提供します。エンドツーエンドのソリューションでイノベーションを加速します。',
+        nav_features: '機能',
+        nav_services: 'サービス',
+        nav_pricing: '料金',
+        nav_contact: 'お問い合わせ',
+        nav_cta: '相談する',
+        burger_label: 'メニューを開く',
+        lang_label: '言語',
+        hero_badge: 'AI • クラウド • アプリ • セキュリティ',
+        hero_title: 'エンドツーエンドのITソリューションでデジタルトランスフォーメーションを加速',
+        hero_subtitle: '私たちは最新のソフトウェアシステムを設計・構築・運用し、コスト最適化と持続的なスケールを実現します。',
+        hero_cta_primary: '今すぐ開始',
+        hero_cta_secondary: '機能を見る',
+        metric_projects: '成功したプロジェクト',
+        metric_cost: 'クラウドコスト最適化',
+        metric_sla: 'インフラSLA',
+        hero_demo: 'AI、クラウド、セキュリティ、クロスプラットフォーム開発を備えたデジタルソリューションのダッシュボードデモ。',
+        features_title: 'なぜTechNova？',
+        features_sub: '強固な技術基盤、リーンなプロセス、結果へのコミットメント。',
+        feature1_title: 'モダンアーキテクチャ',
+        feature1_desc: 'マイクロサービス、イベント、CQRS、IaCにより柔軟にスケールし、ダウンタイムを削減。',
+        feature1_tag: 'スケーラブル',
+        feature2_title: 'AI統合',
+        feature2_desc: 'NLP、コンピュータビジョン、RAG/LLMで自動化とパーソナライズ体験を実現。',
+        feature2_tag: 'AIファースト',
+        feature3_title: '標準に基づくセキュリティ',
+        feature3_desc: 'ゼロトラスト、SSO/OAuth2、エンドツーエンド暗号化、ISO 27001とGDPRに準拠。',
+        feature3_tag: 'セキュリティ',
+        services_title: '主なサービス',
+        services_sub: 'コンサル、導入、運用まで。',
+        service1_title: 'ソフトウェア開発',
+        service1_desc: '最新スタック（React、.NET、Node、Go）でWeb、モバイル、APIを開発。CI/CDと自動テスト。',
+        service2_title: 'クラウド & DevOps',
+        service2_desc: 'AWS/Azure/GCPの設計、Kubernetes、Observability（Prometheus、Grafana）。',
+        service3_title: 'AI & データ',
+        service3_desc: 'LLM、RAG、データパイプライン、DWH、BIダッシュボードで迅速な意思決定。',
+        service4_title: 'セキュリティ & コンプライアンス',
+        service4_desc: 'セキュリティ評価、ペンテスト、ハードニング、コンプライアンス支援。',
+        testimonials_title: 'お客様の声',
+        testimonials_sub: 'スタートアップから大企業まで信頼されています。',
+        quote1: '「迅速な導入、優れた品質、献身的なサポート — 初日から安定稼働しました。」',
+        who1: '— チャン・ミン、CTO、FintechX',
+        quote2: '「AIソリューションで処理時間が40%短縮され、顧客体験が向上しました。」',
+        who2: '— グエン・アン、COO、RetailPro',
+        quote3: '「セキュリティとクラウドに精通し、明確なコンサルで運用コストを大幅削減。」',
+        who3: '— レ・ホアン、CIO、HealthOne',
+        pricing_title: '柔軟な料金',
+        pricing_sub: '目標に合ったプランをお選びください。',
+        pricing_starter: 'スターター',
+        pricing_starter_price: '月額1500万VND',
+        pricing_starter_f1: '最大5機能',
+        pricing_starter_f2: '基本的なクラウド導入',
+        pricing_starter_f3: 'サポート時間: 8x5',
+        pricing_growth: 'グロース',
+        pricing_growth_price: '月額3500万VND',
+        pricing_growth_f1: '基本AI/RAGモジュール',
+        pricing_growth_f2: 'Kubernetes + Observability',
+        pricing_growth_f3: 'サポート時間: 12x5',
+        pricing_enterprise: 'エンタープライズ',
+        pricing_enterprise_price: 'お問い合わせ',
+        pricing_enterprise_f1: '高度なアーキテクチャ設計',
+        pricing_enterprise_f2: 'カスタムLLM & 高度なセキュリティ',
+        pricing_enterprise_f3: '24x7サポート',
+        pricing_select: 'プランを選択',
+        contact_us: 'お問い合わせ',
+        pricing_band: '準備はいいですか？ 専門家による30分の無料相談をご利用ください。',
+        book_now: '今すぐ予約',
+        contact_title: 'お問い合わせ',
+        contact_sub: 'ご要望をお知らせください。24時間以内にご連絡します。',
+        contact_info_title: '情報',
+        contact_hotline_label: 'ホットライン:',
+        contact_address_label: '住所:',
+        contact_address: 'ホーチミン市1区',
+        contact_hours: '営業時間: 09:00–18:00 (月–金)',
+        form_name: '氏名',
+        form_email: 'メール',
+        form_company: '会社名（任意）',
+        form_message: 'プロジェクトやご要望の簡単な説明…',
+        form_policy: 'プライバシーポリシーに同意します。',
+        form_submit: '送信',
+        form_sending: '送信中…',
+        form_thanks: 'ありがとうございます。リクエストを受け付けました。（デモ — 実際には送信されません）',
+        footer_rights: 'All rights reserved.'
+      }
+    };
+
+    function applyI18n(lang) {
+      const dict = i18n[lang] || i18n.vi;
+      // Text content
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (key && dict[key] !== undefined) {
+          el.textContent = dict[key];
+        }
+      });
+      // Placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.dataset.i18nPlaceholder;
+        if (key && dict[key] !== undefined) {
+          el.placeholder = dict[key];
+        }
+      });
+      // Special: burger aria-label
+      const burger = document.getElementById('burger');
+      if (burger && dict.burger_label) burger.setAttribute('aria-label', dict.burger_label);
+      // Meta and title
+      if (dict.meta_title) document.title = dict.meta_title;
+      if (dict.meta_desc) {
+        const meta = document.querySelector('meta[name="description"]');
+        meta?.setAttribute('content', dict.meta_desc);
+      }
+      // html lang
+      document.documentElement.setAttribute('lang', lang);
+      // Selects sync
+      const selects = [document.getElementById('langSelect'), document.getElementById('langSelectMobile')].filter(Boolean);
+      selects.forEach(s => { if (s) s.value = lang; });
+      // Persist
+      try { localStorage.setItem('lang', lang); } catch {}
+    }
+
+    // Mobile menu
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
+    });
+    mobileMenu?.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => mobileMenu.classList.remove('show'));
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Form demo submit
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      const lang = (typeof localStorage !== 'undefined' && localStorage.getItem('lang')) || 'vi';
+      status.textContent = (i18n[lang]?.form_sending) || 'Đang gửi...';
+      setTimeout(() => {
+        status.textContent = (i18n[lang]?.form_thanks) || 'Cảm ơn bạn! Yêu cầu đã được ghi nhận. (Demo – chưa gửi thực tế)';
+        form.reset();
+      }, 900);
+      console.log('Contact form data:', data);
+    });
+
+    // Language select events
+    document.getElementById('langSelect')?.addEventListener('change', (e) => applyI18n(e.target.value));
+    document.getElementById('langSelectMobile')?.addEventListener('change', (e) => applyI18n(e.target.value));
+
+    // Init language
+    (function initLang(){
+      const saved = (typeof localStorage !== 'undefined' && localStorage.getItem('lang')) || (navigator.language || 'ja').slice(0,2);
+      const lang = ['vi','en','ja'].includes(saved) ? saved : 'ja';
+      console.log('Init language:', lang);
+      applyI18n(lang);
+    })();
+  </script>
+
+  <script>
+    window.helpbotConfig = {
+      host: 'stg.b-ask.run',
+      configId: '99127bdb-4c0a-467a-b490-3c275d4fe231'
+    };
+  </script>
+  <script src="https://stg.b-ask.run/_/widget/react/widget.iife.js"></script>
+</body>
+</html>
