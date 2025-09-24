@@ -235,6 +235,7 @@
       width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
       background:rgba(10,15,32,.6); color:var(--text); outline:none;
     }
+    input[type=checkbox]{width:16px; height:16px}
     input:focus, textarea:focus{border-color:rgba(108,140,255,.6)}
     .notice{color:var(--muted); font-size:14px}
     @media (max-width:900px){ .contact-grid{grid-template-columns:1fr} }
@@ -390,7 +391,6 @@
           </div>
         </div>
       </div>
-      <div class="illus card"></div>
     </div>
   </section>
 
@@ -482,8 +482,8 @@
           </div>
           <input name="company" placeholder="Công ty (tuỳ chọn)" data-i18n-placeholder="form_company" />
           <textarea required name="message" rows="5" placeholder="Mô tả ngắn về dự án hoặc nhu cầu..." data-i18n-placeholder="form_message"></textarea>
-          <label style="display:flex; gap:10px; align-items:center; color:var(--muted); font-size:14px">
-            <input type="checkbox" required /> <span data-i18n="form_policy">Tôi đồng ý với chính sách bảo mật.</span>
+          <label style="display:flex; gap:10px; align-items:center; justify-content:flex-start; color:var(--muted); font-size:14px">
+            <input type="checkbox" required /> <span data-i18n="form_policy" class="w-100">Tôi đồng ý với chính sách bảo mật.</span>
           </label>
           <button class="cta" type="submit" data-i18n="form_submit">Gửi yêu cầu</button>
           <div id="formStatus" class="notice"></div>
@@ -492,7 +492,13 @@
     </div>
   </section>
 
-  <div data-helpbot-widget></div>
+  <div
+    data-helpbot-widget
+    data-placeholder-text="メッセージを入力してください..."
+    data-placeholder-text-preview-mode="プレビューモード - 入力が無効"
+    data-placeholder-text-reconnecting="アシスタント再接続中..."
+    data-placeholder-text-new-conversation="新しい会話を作成しています...">
+  </div>
 
   <footer>
     <div class="container foot">
